@@ -24,7 +24,7 @@ out/
 test.trace.db
 test.mv.db
 /prefs.json
-.prefs
+prefs/
 
 
 ### Eclipse ###
