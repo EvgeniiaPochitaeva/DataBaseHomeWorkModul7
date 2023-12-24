@@ -1,5 +1,9 @@
 package app.database;
 
+import app.parametr.Client;
+import app.parametr.Project;
+import app.parametr.Worker;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -27,21 +31,23 @@ public class PrepareService {
                 "INSERT INTO project_worker (project_id, worker_id) VALUES(?,?)"
         );
     }
-    public boolean createNewWorker(String name, LocalDate birthday, String level, int salary) {
+    public boolean createNewWorker(Worker worker) {
         try {
-            InsWorker.setString(1,name);
-            InsWorker.setString(2, birthday.toString());
-            InsWorker.setString(3, level);
-            InsWorker.setInt(4, salary);
+            System.out.println("Executing SQL: " + "INSERT INTO worker (name, birthday, level, salary) VALUES(?,?,?,?)");
+            InsWorker.setString(1, worker.getName());
+            InsWorker.setString(1,worker.getName());
+            InsWorker.setString(2,worker.getBirthday().toString());
+            InsWorker.setString(3, worker.getLevel());
+            InsWorker.setInt(4, worker.getSalary());
             return InsWorker.executeUpdate() > 0;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         return false;
     }
-    public boolean createNewClient(String name) {
+    public boolean createNewClient(Client client) {
         try {
-            InsClient.setString(1,name);
+            InsClient.setString(1, client.getName());
 
             return InsClient.executeUpdate() > 0;
         } catch (Exception ex) {
@@ -49,12 +55,12 @@ public class PrepareService {
         }
         return false;
     }
-    public boolean createNewProject(int client_id, LocalDate start_date, LocalDate finish_date) {
+    public boolean createNewProject(Project project) {
 
         try {
-            InsProject.setInt(1,client_id);
-            InsProject.setString(2, start_date.toString());
-            InsProject.setString(3, finish_date.toString());
+            InsProject.setInt(1,project.getClientId());
+            InsProject.setString(2, project.getStartDate().toString());
+            InsProject.setString(3, project.getFinishDate().toString());
 
             return InsProject.executeUpdate() > 0;
         } catch (Exception ex) {
