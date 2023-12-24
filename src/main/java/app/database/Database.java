@@ -1,6 +1,6 @@
 package app.database;
 
-import app.prefs.Prefs;
+import app.parametr.Prefs;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
